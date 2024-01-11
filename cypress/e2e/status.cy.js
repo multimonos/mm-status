@@ -1,23 +1,27 @@
 import 'cypress-each'
+import {Endpoints} from "../fixtures/endpoints"
 
 
-const endpoints = [
-    { name: "player", url: "http://localhost:5173" },
-    { name: "api", url: "http://localhost:8880" },
-    { name: "api.vite", url: "http://localhost:8881" },
-    { name: "api/sequences", url: "http://localhost:8880/sequences" },
-    { name: "api/audio", url: "http://localhost:8880/audio" },
-    { name: "api/sketches", url: "http://localhost:8880/sketches" },
-    { name: "sketch", url: "http://localhost:7770" },
-    { name: "sketch/sketches", url: "http://localhost:7770/sketches" },
-]
+const timeout = 5000
+const target = Cypress.env("target")
+
+const endpoints = Endpoints[target] || []
 
 describe( 'Status mm-*', () => {
 
-    it.each( endpoints )(
-        endpoint => `${ endpoint.name }\n ${ endpoint.url }`,
-        endpoint => {
-            cy.request( endpoint.url ).its( 'status' ).should( 'equal', 200 )
-        } )
+    describe( `Service endpoints`, () => {
+
+        it.each( endpoints )(
+            endpoint => `${ endpoint.name } -- ${ endpoint.url }`,
+            endpoint => {
+                cy.request( {
+                    method: "get",
+                    url: endpoint.url,
+                    followRedirect: true,
+                    timeout,
+                } ).its( 'status' ).should( 'equal', 200 )
+            } )
+
+    } )
 
 } )

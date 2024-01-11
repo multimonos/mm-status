@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx cypress open --e2e --browser=electron"
+    "open:dev": "CYPRESS_target=dev npx cypress open --e2e --browser=electron",
+    "test:dev": "CYPRESS_target=dev npx cypress run --e2e"
   },
   "keywords": [],
   "author": "",
