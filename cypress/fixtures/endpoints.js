@@ -1,4 +1,4 @@
-export const Endpoints = {
+export const ServiceEndpoints = {
     "dev": [
         { name: "cms", url: "http://localhost:3333/desk" },
         { name: "player", url: "http://localhost:5173" },

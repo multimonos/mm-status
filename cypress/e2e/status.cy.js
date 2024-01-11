@@ -1,15 +1,15 @@
 import 'cypress-each'
-import {Endpoints} from "../fixtures/endpoints"
+import { ServiceEndpoints } from "../fixtures/endpoints"
 
 
 const timeout = 5000
-const target = Cypress.env("target")
+const target = Cypress.env( "target" )
 
-const endpoints = Endpoints[target] || []
+const endpoints = ServiceEndpoints[target] || []
 
 describe( 'Status mm-*', () => {
 
-    describe( `Service endpoints`, () => {
+    describe( `Service Endpoints`, () => {
 
         it.each( endpoints )(
             endpoint => `${ endpoint.name } -- ${ endpoint.url }`,
